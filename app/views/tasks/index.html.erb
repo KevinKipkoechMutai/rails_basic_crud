@@ -1,0 +1,16 @@
+<h1>Tasks</h1>
+
+<%= link_to "home", {controller: "main", action: "index"} %>
+
+<% if @page == 1%>
+    <h2>Task List</h2>
+<%end%>
+
+<ul>
+<% @tasks.each do |task| %>
+    <li><%= task%></li>
+<%end%>
+</ul>
+
+<br />
+Page: <%= @page%>
