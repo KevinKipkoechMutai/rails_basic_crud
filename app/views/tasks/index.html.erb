@@ -1,16 +1,32 @@
-<h1>Tasks</h1>
 
-<%= link_to "home", {controller: "main", action: "index"} %>
+<%= link_to "Back to homepage", {controller: "main", action: "index"} %> <br/>
 
-<% if @page == 1%>
-    <h2>Task List</h2>
-<%end%>
+<div class="tasks index">
+    <h2>Tasks</h2>
 
-<ul>
-<% @tasks.each do |task| %>
-    <li><%= task%></li>
-<%end%>
-</ul>
+    <%= link_to("Create new task", new_task_path, class: 'action new') %>
 
-<br />
-Page: <%= @page%>
+    <table class="listing" summary="Task list" style="width: 100%;">
+        <tr class="header" style="width: 100%;">
+            <th>#</th>
+            <th>Task</th>
+            <th>Completed</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+        <% @tasks.each do |task| %>
+        <tr style="width: 100%;">
+            <td><%= task.position%></td>
+            <td><%= task.name%></td>
+            <td><%= task.completed? ? 'Yes' : 'No'%></td>
+            <td><%= task.category&.name || '-'%></td>
+            <td class='actions'>
+                <%= link_to("Show", task_path(task), class: "action show") %>
+                <%= link_to("Edit", edit_task_path(task), class: "action edit") %>
+                <%= link_to("Delete", delete_task_path(task), class: "action delete") %>
+            </td>
+        </tr>
+        <%end%>
+    </table>
+</div>
+
